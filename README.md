@@ -31,6 +31,40 @@ http://127.0.0.1:8000
 
 ## Construire un container Docker avec une application personnalisée en utilisant le fichier Dockerfile.
 
+#### 1. Créer un fichier Dockerfile
+
+Exemple de ffichier Dockerfile :
+
+```
+# syntax=docker/dockerfile:1
+FROM ubuntu:22.04
+
+# install app dependencies
+RUN apt-get update && apt-get install -y python3 python3-pip
+RUN pip install flask==3.0.*
+RUN pip install prometheus_flask_exporter 
+
+# install app
+COPY flask_docker.py /
+
+# final configuration
+ENV FLASK_APP=flask_docker
+EXPOSE 8000
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+#### 2. Lancer le container configuré avec le Dockerfile
+
+``` 
+docker build -t flasktest:latest .
+```
+
+``` 
+docker run -d -p 8000:8000 flasktest
+```
+
+## Construire un Docker-Compose contenant plusieurs container.
+
 #### 1. Cloner le repo git
 
 ```
@@ -61,9 +95,7 @@ Il vous est maintenant possible de créer une datasource  Prometheus dans Grafan
 Ici la query utilisé est la suivante : 
 ``` sum(flask_http_request_total) by (status) ```
 
-voici un exemple de graph obtenu suite à des requètes sur l'application Flask (200 et 404)
 
-![alt text](image.png)
 
 -----------------------------------
 
