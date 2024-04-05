@@ -96,6 +96,29 @@ Il vous est maintenant possible de créer une datasource  Prometheus dans Grafan
 Ici la query utilisé est la suivante : 
 ``` sum(flask_http_request_total) by (status) ```
 
+## Commandes courantes de Docker :
+
+* ```docker run```
+    *  Cette commande est utilisée pour exécuter une image Docker, créant ainsi un conteneur. Vous pouvez spécifier divers paramètres tels que le nom du conteneur, les ports à ouvrir, les variables d'environnement, etc.
+
+    * Exemple: ```docker run -d -p 80:80 --name webserver nginx```
+
+
+* ```docker build```
+    * Utilisée pour construire une image Docker à partir d'un Dockerfile. Cette commande vous permet de créer une image personnalisée basée sur les instructions définies dans votre Dockerfile.
+
+    * Exemple: ```docker build -t my-custom-image .```
+
+* ```docker images```
+    * Affiche toutes les images Docker locales sur votre système. Cela vous permet de voir les images que vous avez construites ou tirées d'un registre.
+
+* ```docker ps```
+    * Cette commande liste tous les conteneurs Docker en cours d'exécution sur votre système. Avec des options supplémentaires, vous pouvez également voir les conteneurs arrêtés.
+
+    * Exemple: ```docker ps``` 
+
+* ```docker-compose up -d``` et ```docker-compose down```
+    * Ces commandes sont utilisées pour démarrer et arrêter des applications multi-conteneurs définies dans un fichier docker-compose.yml. Cela simplifie la gestion des applications qui s'exécutent sur plusieurs conteneurs.
 
 
 -----------------------------------
