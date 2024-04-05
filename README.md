@@ -13,8 +13,9 @@ Ce projet contient un container avec une application Flask simple qui affiche un
 
 ## Prérequis
 
-- Git (Instalation de git : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git)
-- Docker (Installation de git sur Ubuntu : https://docs.docker.com/engine/install/ubuntu/)
+- Git (Instalation de git : [ici](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git))
+- Docker (Installation de git sur Ubuntu : [ici](https://docs.docker.com/engine/install/ubuntu/))
+- Python
 
 -----------------------------------
 
@@ -33,7 +34,7 @@ http://127.0.0.1:8000
 
 #### 1. Créer un fichier Dockerfile
 
-Exemple de ffichier Dockerfile :
+Exemple de fichier Dockerfile :
 
 ```
 # syntax=docker/dockerfile:1
