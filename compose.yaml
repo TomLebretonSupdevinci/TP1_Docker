@@ -15,7 +15,6 @@ services:
       - "9090:9090"
     restart: always
 
-
   grafana:
     image: grafana/grafana:latest
     ports:
