@@ -1,26 +1,71 @@
 # TP Docker
 
-Ce projet contient une application Flask simple qui affiche une page de bienvenue. Elle est prête à être déployée en utilisant Docker.
+Ce projet contient un container avec une application Flask simple qui affiche une page de bienvenue. Elle est prête à être déployée en utilisant Docker.Le but de se projet est de découvrir l'outils Docker :
+* Démarrer un container Docker avec une image de hub.docker.com.
+* Construire un container Docker avec une application personnalisée en utilisant le fichier Dockerfile.
+* Lancer plusieurs containers Docker en utilisant docker-compose
+    * Dans ce TP nous avons créer un docker compose avec : 
+        * L'application Flask
+        * Prometheus (avec l'application Flask en target)
+        * Grafana
+
+-----------------------------------
 
 ## Prérequis
 
-- Git
-- Docker
+- Git (Instalation de git : https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git)
+- Docker (Installation de git sur Ubuntu : https://docs.docker.com/engine/install/ubuntu/)
 
-## Étapes pour exécuter l'application
+-----------------------------------
 
-### 1. Cloner le dépôt
+## Étapes pour exécuter un container docker Flask via une image de hub.docker.com
 
+#### 1. Lancer le container
+```
+sudo docker run -p 127.0.0.1:8000:8000 flask:latest
+```
+Ici l'application sera accessible sur l'ip : 127.0.0.1 sur le port 8000.
+http://127.0.0.1:8000
+
+------------------------------------
+
+## Construire un container Docker avec une application personnalisée en utilisant le fichier Dockerfile.
+
+#### 1. Cloner le repo git
+
+```
 git clone git@github.com:TomLebretonSupdevinci/TP1_Docker.git
+```
 
-### 2. Construire l'image Docker
+#### 2. Build les applications avec docker-compose
+Le fichier compose.yaml contient la configuration des 3 containers (Flask, Promotheus et Grafana)
+Le fichier promotheus.yaml contient lui la configuration du scrapping de Promotheus afin de récupérer les targets et donc les metrics.
 
-cd TP1_Docker
-sudo docker run -p 127.0.0.1:8000:8000 flask:latest 
+Commande pour lancer le build du docker compose :
 
-### 3. Lancer l'application
+```
+docker-compose build
+docker-compose up
+```
 
-docker run -p 127.0.0.1:8000:8000 flask:latest
+Se connecter aux différentes applications : 
+* Flask : http://127.0.0.1:8000
+* Promotheus : http://127.0.0.1:9090
+* Grafana : http://127.0.0.1:3000
+
+Pour se connecter à Grafana, utiliser ces identifiants par défaut : 
+Utilisateur : admin
+Mot de passe : admin
+
+Il vous est maintenant possible de créer une datasource  Prometheus dans Grafana pour visualiser vos données.
+Ici la query utilisé est la suivante : 
+``` sum(flask_http_request_total) by (status) ```
+
+voici un exemple de graph obtenu suite à des requètes sur l'application Flask (200 et 404)
+
+![alt text](image.png)
+
+-----------------------------------
 
 ## Auteurs
 
